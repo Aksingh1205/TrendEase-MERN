@@ -340,7 +340,7 @@ export const paymentVerificationController = async(req,res) =>{
     //     .digest('hex')
     // ceived', razorpay_signature);
     // nerated', expectedSignature);
-    return res.redirect('http://localhost:5173/dashboard/user/orders')
+    return res.redirect(`${process.env.FRONTEND_URL}/dashboard/user/orders`) 
     } 
 // //payment gateway
 // //token
