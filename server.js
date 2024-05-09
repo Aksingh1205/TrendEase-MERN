@@ -9,7 +9,7 @@ import productRoutes from './routes/productRoutes.js'
 import cors from 'cors'
 import Razorpay from "razorpay";
 import path from 'path'
-import {fileURLToPath} from 'url'
+
 
 //configure env
 dotenv.config();
@@ -17,9 +17,6 @@ dotenv.config();
 //database config
 connectDB();
 
-//es-module fix
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)  
 //rest obj
 const app = express()
 
@@ -27,17 +24,17 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'))
-app.use(express.static(path.join(__dirname,'./client/build')))
+
 
 //routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/catagory", catagoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
-//rest api
-app.use('*', function(req,res){
-    res.sendFile(path.join(__dirname, './client/build/index.html'))
-})
+app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+});
 
 app.get('/api/getkey', (req,res) =>{
     res.status(200).json({key : process.env.RAZORPAY_API_KEY})
