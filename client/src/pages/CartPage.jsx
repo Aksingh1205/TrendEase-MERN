@@ -44,8 +44,8 @@ const CartPage = () => {
         e.preventDefault()
         setLoading(true);
         let price = totalPrice()
-        const {data : {key}} = await axios.get('http://localhost:8080/api/getkey')
-        const {data : {order}} = await axios.post("http://localhost:8080/api/v1/product/payment",{
+        const {data : {key}} = await axios.get('/api/getkey')
+        const {data : {order}} = await axios.post("/api/v1/product/payment",{
             amount : price,
             cart
         })
@@ -57,7 +57,7 @@ const CartPage = () => {
             description: "Test Transaction",
             image: "https://example.com/your_logo",
             order_id: order.id, 
-            callback_url: "http://localhost:8080/api/v1/product/paymentverification",
+            callback_url: "/api/v1/product/paymentverification",
             prefill: { 
                 name: auth.user.name, 
                 email: auth.user.email,
@@ -107,7 +107,7 @@ const CartPage = () => {
                                 cart?.map(p => (
                                     <div className='row card flex-row'>
                                         <div className='col-md-4'>
-                                        <img src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`} className="card-img-top" alt={p.name} width="100%"
+                                        <img src={`/api/v1/product/product-photo/${p._id}`} className="card-img-top" alt={p.name} width="100%"
                                             height={"130px"}/>
                                         </div>
                                         <div className="col-md-4">

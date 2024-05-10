@@ -24,7 +24,7 @@ const UpdateProduct = () => {
   //get single product
   const getSingleProduct = async() => {
     try {
-        const {data} = await axios.get(`http://localhost:8080/api/v1/product/get-product/${params.slug}`)
+        const {data} = await axios.get(`/api/v1/product/get-product/${params.slug}`)
         setName(data.product.name)
         setDescription(data.product.description)
         setPrice(data.product.price)
@@ -45,7 +45,7 @@ const UpdateProduct = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/catagory/get-catagory");
+      const { data } = await axios.get("/api/v1/catagory/get-catagory");
       if (data?.success) {
         setCatagories(data?.catagory);
       }
@@ -71,7 +71,7 @@ const UpdateProduct = () => {
       photo && productData.append('photo', photo)
       productData.append('catagory', catagory)
       productData.append('shipping', shipping)
-      const {data} = axios.put(`http://localhost:8080/api/v1/product/update-product/${id}`, productData)
+      const {data} = axios.put(`/api/v1/product/update-product/${id}`, productData)
       if(data?.success){
         toast.error(data?.message)  
       }else{
@@ -89,7 +89,7 @@ const UpdateProduct = () => {
     try {
       let answer = window.prompt('Are u sure u want to delete ?')
       if(!answer) return;
-      const {data} = await axios.delete(`http://localhost:8080/api/v1/product/delete-product/${id}`)
+      const {data} = await axios.delete(`/api/v1/product/delete-product/${id}`)
       toast.success('Product deleted successfully')
       navigate('/dashboard/admin/products')
     } catch (error) {
@@ -133,7 +133,7 @@ const UpdateProduct = () => {
                     </div>
                   ) : (
                     <div className='text-center'>
-                      <img src={`http://localhost:8080/api/v1/product/product-photo/${id}`} alt='product_photo' height={'200px'} className='img img-responsive'/>
+                      <img src={`/api/v1/product/product-photo/${id}`} alt='product_photo' height={'200px'} className='img img-responsive'/>
                     </div>
                   )}
                 </div>

@@ -18,7 +18,7 @@ const CreateCatagory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("http://localhost:8080/api/v1/catagory/create-catagory", {
+      const { data } = await axios.post("/api/v1/catagory/create-catagory", {
         name,
       });
       if (data?.success) {
@@ -36,7 +36,7 @@ const CreateCatagory = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/catagory/get-catagory");
+      const { data } = await axios.get("/api/v1/catagory/get-catagory");
       if (data?.success) {
         setCatagories(data?.catagory);
       }
@@ -54,7 +54,7 @@ const CreateCatagory = () => {
   const handleUpdate = async(e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.put(`http://localhost:8080/api/v1/catagory/update-catagory/${selected._id}`, {name : updatedName});
+      const { data } = await axios.put(`/api/v1/catagory/update-catagory/${selected._id}`, {name : updatedName});
       if(data.success){
         toast.success(`${updatedName} is updated`)
         setSelected(null)
@@ -73,7 +73,7 @@ const CreateCatagory = () => {
   //delete catagory
   const handleDelete = async(id) => {
     try {
-      const { data } = await axios.delete(`http://localhost:8080/api/v1/catagory/delete-catagory/${id}`);
+      const { data } = await axios.delete(`/api/v1/catagory/delete-catagory/${id}`);
       if(data.success){
         toast.success(`catagory is deleted`)
         getAllCategory()

@@ -24,7 +24,7 @@ const HomePage = () => {
   //get total count
   const getTotal = async() =>{
     try {
-      const {data} = await axios.get('http://localhost:8080/api/v1/product/product-count')
+      const {data} = await axios.get('/api/v1/product/product-count')
       setTotal(data?.total)
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ const HomePage = () => {
   const getallProducts = async() => {
     try {
       setLoading(true)
-      const {data} = await axios.get(`http://localhost:8080/api/v1/product/product-list/${page}`)
+      const {data} = await axios.get(`/api/v1/product/product-list/${page}`)
       setLoading(false)
       setProducts(data.products)
     } catch (error) {
@@ -46,7 +46,7 @@ const HomePage = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8080/api/v1/catagory/get-catagory");
+      const { data } = await axios.get("/api/v1/catagory/get-catagory");
       if (data?.success) {
         setCatagories(data?.catagory);
       }
@@ -63,7 +63,7 @@ const HomePage = () => {
   const loadMore = async() => {
     try {
       setLoading(true)
-      const {data} = await axios.get(`http://localhost:8080/api/v1/product/product-list/${page}`)
+      const {data} = await axios.get(`/api/v1/product/product-list/${page}`)
       setLoading(false)
       setProducts([...products, ...data?.products])
     } catch (error) {
@@ -100,7 +100,7 @@ const HomePage = () => {
   // get filtered products
   const filterProduct = async() => {
     try {
-      const {data} = await axios.post("http://localhost:8080/api/v1/product/filter-product", {
+      const {data} = await axios.post("/api/v1/product/filter-product", {
         checked,radio
       });
       setProducts(data?.products);
@@ -151,7 +151,7 @@ const HomePage = () => {
           <div className='d-flex flex-wrap'>
             {products?.map(p => (
               <div key={p._id} className="card m-2" style={{ width: '15rem' }} >
-                <img src={`http://localhost:8080/api/v1/product/product-photo/${p._id}`} className="card-img-top" alt={p.name} />
+                <img src={`/api/v1/product/product-photo/${p._id}`} className="card-img-top" alt={p.name} />
                 <div className="card-body">
                 <div className="card-name-price">
                   <h5 className="card-title">{p.name}</h5>
