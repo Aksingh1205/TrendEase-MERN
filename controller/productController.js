@@ -5,7 +5,7 @@ import slugify from 'slugify'
 import orderModel from "../models/orderModel.js";
 import { instance } from "../server.js";
 import dotenv from 'dotenv';
-
+import crypto from 'crypto'
 
 
 
@@ -46,7 +46,7 @@ export const createProductController = async(req,res) => {
         })
 
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error in creating product',
@@ -66,7 +66,7 @@ export const getProductController = async(req,res) => {
             products
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error while fetching all products',
@@ -85,7 +85,7 @@ export const getSingleProductController = async(req,res) => {
             product
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error while fetching single product',
@@ -104,7 +104,7 @@ export const productPhotoController = async(req,res) => {
             return res.status(200).send(product.photo.data)
         }
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error while fetching photo',
@@ -122,7 +122,7 @@ export const deleteProductController = async (req,res) => {
             message : 'Product deleted successfully'
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error while deleting product'
@@ -165,7 +165,7 @@ export const updateProductController = async(req,res) => {
         })
 
     } catch (error) {
-        
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error in updating product',
@@ -188,7 +188,7 @@ export const filterController = async(req,res) => {
             products
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error in filtering product',
@@ -206,7 +206,7 @@ export const productCountController = async(req,res) => {
             total
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error in product count',
@@ -226,7 +226,7 @@ export const productListController = async(req,res) => {
             products
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error in loading product per page',
@@ -247,7 +247,7 @@ export const searchProductController = async(req,res) => {
         }).select('-photo')
         res.json(results)
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error in search product API',
@@ -269,7 +269,7 @@ export const relatedProductController = async(req,res) => {
             products
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error while getting similar products',
@@ -289,7 +289,7 @@ export const productCatagoryController = async(req,res) => {
             products
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error while getting products',
@@ -318,7 +318,7 @@ export const paymentController = async(req,res) => {
             order
         })
     } catch (error) {
-        
+        console.log(error);
         res.status(400).send({
             success : false,
             message : 'Error in payment gateway',
@@ -330,7 +330,7 @@ export const paymentController = async(req,res) => {
 
 //payment verification
 export const paymentVerificationController = async(req,res) =>{
-    
+    console.log(req.body);
     // const{razorpay_order_id, razorpay_payment_id, razorpay_signature} = req.body
 
     // const body = razorpay_order_id + '|' + razorpay_payment_id
@@ -338,9 +338,9 @@ export const paymentVerificationController = async(req,res) =>{
     //     .createHmac('sha256', process.env.RAZORPAY_API_SECRET)
     //     .update(body.toString())
     //     .digest('hex')
-    // ceived', razorpay_signature);
-    // nerated', expectedSignature);
-    return res.redirect(`${process.env.FRONTEND_URL}/dashboard/user/orders`) 
+    // console.log('sig received', razorpay_signature);
+    // console.log('sig generated', expectedSignature);
+    return res.redirect('http://localhost:5173/dashboard/user/orders')
     } 
 // //payment gateway
 // //token
@@ -355,7 +355,7 @@ export const paymentVerificationController = async(req,res) =>{
 //             }
 //         })
 //     } catch (error) {
-//         
+//         console.log(error);
 //     }
 // }
 
@@ -389,6 +389,6 @@ export const paymentVerificationController = async(req,res) =>{
 //     )
 
 //     } catch (error) {
-//         
+//         console.log(error);
 //     }
 // }

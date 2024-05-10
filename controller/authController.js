@@ -49,7 +49,7 @@ export const registerController = async(req,res) => {
         })
 
     } catch (message) {
-        
+        console.log(message);
         res.status(500).send({
             success: false,
             message: 'Error in registration',
@@ -106,7 +106,7 @@ export const loginController = async(req,res) => {
         })
 
     } catch (message) {
-        
+        console.log(message);
         res.status(500).send({
             success: false,
             message : 'Error in login',
@@ -147,7 +147,7 @@ export const forgotPasswordController = async(req,res) => {
         })
 
     } catch (error) {
-       
+        console.log(error);
         res.status(500).send({
             success : false,
             message: 'Something went wrong',
@@ -183,7 +183,7 @@ export const updateProfileController = async(req,res) => {
             updatedUser
         })
     } catch (error) {
-      
+        console.log(error);
         res.status(400).send({
             success : false,
             message : "Error while updating profile",
@@ -198,7 +198,7 @@ export const getOrdersController = async(req,res) =>{
         const orders = await orderModel.find({buyer : req.user._id}).populate('products','-photo').populate('buyer','name')
         res.json(orders)
     } catch (error) {
-       
+        console.log(error);
         res.status(500).send({
             success : false,
             message : "Error while fetching orders",
@@ -213,7 +213,7 @@ export const getAllOrdersController = async(req,res) =>{
         const orders = await orderModel.find({}).populate('products','-photo').populate('buyer','name').sort({ createdAt: -1 });
         res.json(orders)
     } catch (error) {
-       
+        console.log(error);
         res.status(500).send({
             success : false,
             message : "Error while fetching orders",
@@ -230,7 +230,7 @@ export const orderStatusController = async(req,res) => {
         const orders =  await orderModel.findByIdAndUpdate(orderId, {status}, {new : true})
         res.json(orders)
     } catch (error) {
-       
+        console.log(error);
         res.status(500).send({
             success : false,
             message : 'Error while updating order status',
